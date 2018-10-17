@@ -1,5 +1,3 @@
-#class {ask-quest-from-chongxu} open;
-
 #alias {AQ} {ask-quest};
 #alias {ask-quest} {
     ask chongxu about quest;
