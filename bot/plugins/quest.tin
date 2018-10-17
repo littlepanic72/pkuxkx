@@ -41,6 +41,7 @@
     #action {冲虚道长说道：「现在还没有新的工作可以分配给你} {
         #showme 好的，那我待会儿再来看看。;
         #class waitfor-chongxu-answer kill;
+        time;
         #delay 3 ask-quest;
     };
     #action {冲虚道长说道：「道兄还有任务在身} {
@@ -54,6 +55,11 @@
         ask-quest;
     }{10};
     #class waitfor-chongxu-answer close;
+};
+
+#action {北大侠客行游戏时间是%*{午夜|正午}} {
+    about-me 该去采气了！;
+    goto-caiqi;
 };
 
 #alias {goto-liandan} {

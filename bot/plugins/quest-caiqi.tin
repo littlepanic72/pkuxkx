@@ -7,27 +7,67 @@
         #var {songjing.after-handler} %1;
     };
 
-    n;n;n;n;n;nu;u;wu;su;eu;nu;nu;
-    about-me 啊！前面是迷宫！我到不了天柱峰了，主人快来救救我！;
-
-    #delay 115 cancel-quest;
-    #delay 116 ask-quest;
-};
-
-#alias {caiqi.cont1} {
-    nu;u;wu;su;eu;nu;nu;nu;nu;nu;nu;nu;nu;nu;nu;
-    #delay 1 {
-        about-me 好嘞！现在开始采气！;
-        caiqi;
-    };
-    #delay 100 {
-        sd;sd;sd;sd;sd;sd;sd;sd;sd;sd;wd;nd;ed;d;sd;
-        #delay 1 {about-me 啊！前面是迷宫！我回不去了，主人快来救救我！};
+    #path load {${path-wdgc-to-tzf}};
+    set brief 1;
+    #tick {goto-caiqi} {#path walk f} {0.1};
+    #event {END OF PATH} {
+        #untick goto-caiqi;
+        set brief 3;
+        #delay {2} {caiqi};
+        #delay {110} {caiqi.back};
     };
 };
 
-#alias {caiqi.cont2} {
-    sd;sd;wd;nd;ed;d;sd;s;s;s;s;s;
-    success-quest;
-    ask-quest;
+#alias {caiqi.back} {
+    #path load {${path-tzf-to-wdgc}};
+    set brief 1;
+    #tick {caiqi-back} {#path walk f;} {0.1};
+    #event {END OF PATH} {
+        #untick caiqi-back;
+        set brief 3;
+        #delay {2} {
+            ask chongxu daozhang about success;
+            ${caiqi.after-handler};
+        };
+    };
+};
+
+#var {path-wdgc-to-tzf} {
+    #nop 获得下山许可;
+    n;ask song yuanqiao about 下山;s;
+    #nop 武当广场 -> 紫霄宫;
+    sd;
+    #nop 紫霄宫 -> 太子岩;
+    eu;e;e;e;eu;eu;eu;e;e;e;eu;
+    #nop 太子岩 -> 雷神洞;
+    eu;eu;ne;nu;nw;nu;ne;eu;se;u;nu;eu;su;wu;u;eu;
+    #nop 雷神洞 -> 乌鸦岭;
+    nu;eu;ne;nu;nw;nu;ne;eu;se;u;nu;eu;su;wu;u;nu;
+    #nop 乌鸦岭 -> 南岩峰;
+    nu;
+    #nop 南岩峰 -> 潘神洞;
+    wu;nu;nw;wu;sw;nu;eu;su;wu;u;nu;nw;wu;sw;nu;eu;su;wu;u;nu;nw;wu;sw;nu;eu;su;wu;u;wu;
+    #nop 潘神洞 -> 朝天宫;
+    sw;
+    #nop 朝天宫 -> 天柱峰;
+    nu;nu;nu;nu;nu;nu;nu;nu;
+};
+
+#var {path-tzf-to-wdgc} {
+    #nop 天柱峰 -> 朝天宫;
+    sd;sd;sd;sd;sd;sd;sd;sd;
+    #nop 朝天宫 -> 潘神洞;
+    ne;
+    #nop 潘神洞 -> 南岩峰;
+    ed;d;ed;nd;wd;sd;ne;ed;se;sd;d;ed;nd;wd;sd;ne;ed;se;sd;d;ed;nd;wd;sd;ne;ed;se;sd;ed;
+    #nop 南岩峰 -> 乌鸦岭;
+    sd;
+    #nop 乌鸦岭 -> 雷神洞;
+    sd;d;ed;nd;wd;sd;d;nw;wd;sw;sd;se;sd;sw;wd;sd;
+    #nop 雷神洞 -> 太子岩;
+    wd;d;ed;nd;wd;sd;d;nw;wd;sw;sd;se;sd;sw;wd;wd;
+    #nop 太子岩 -> 紫霄宫;
+    wd;w;w;w;wd;wd;wd;w;w;w;wd;
+    #nop 紫霄宫 -> 武当广场;
+    nu;
 };
