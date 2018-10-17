@@ -7,6 +7,7 @@
         #var {songjing.after-handler} %1;
     };
 
+    #class {goto-caiqi-class} open;
     #path load {${path-wdgc-to-tzf}};
     set brief 1;
     #tick {goto-caiqi} {#path walk f} {0.1};
@@ -14,11 +15,16 @@
         #untick goto-caiqi;
         set brief 3;
         #delay {2} {caiqi};
-        #delay {110} {caiqi.back};
+        #delay {100} {
+            #class {goto-caiqi-class} kill;
+            caiqi.back;
+        };
     };
+    #class {goto-caiqi-class} close;
 };
 
 #alias {caiqi.back} {
+    #class {caiqi-back-class} open;
     #path load {${path-tzf-to-wdgc}};
     set brief 1;
     #tick {caiqi-back} {#path walk f;} {0.1};
@@ -26,10 +32,12 @@
         #untick caiqi-back;
         set brief 3;
         #delay {2} {
+            #class {caiqi-back-class} kill;
             ask chongxu daozhang about success;
             ${caiqi.after-handler};
         };
     };
+    #class {caiqi-back-class} close;
 };
 
 #var {path-wdgc-to-tzf} {

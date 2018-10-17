@@ -13,6 +13,10 @@
     ask chongxu about success;
 };
 
+#alias {quest-idle} {
+    check-caiqi;
+};
+
 #action {你向冲虚道长打听有关『quest』的消息。$} {
     #class waitfor-chongxu-answer open;
     #action {冲虚道长说道：「武当三侠最近迷上了炼丹} {
@@ -41,8 +45,8 @@
     #action {冲虚道长说道：「现在还没有新的工作可以分配给你} {
         #showme 好的，那我待会儿再来看看。;
         #class waitfor-chongxu-answer kill;
-        time;
         #delay 3 ask-quest;
+        quest-idle;
     };
     #action {冲虚道长说道：「道兄还有任务在身} {
         about-me 是嘛？我怎么不记得了？;
@@ -57,9 +61,21 @@
     #class waitfor-chongxu-answer close;
 };
 
-#action {北大侠客行游戏时间是%*{午夜|正午}} {
-    about-me 该去采气了！;
-    goto-caiqi;
+#var {caiqi.lasttime} {};
+
+#alias {check-caiqi} {
+    time;
+    #class {check-caiqi} open;
+    #action {北大侠客行游戏时间是%*日{正午|午夜}时分} {
+        #var {caiqi.shichen} %%2;
+        #if { "${caiqi.lasttime}" != "${caiqi.shichen}" } {
+            about-me 已经是${caiqi.shichen}了，上一次采气还是${caiqi.lasttime}，该去采气了！;
+            #var {caiqi.lasttime} ${caiqi.shichen};
+            #class {check-caiqi} kill;
+            goto-caiqi;
+        };
+    };
+    #class {check-caiqi} close;
 };
 
 #alias {goto-liandan} {
