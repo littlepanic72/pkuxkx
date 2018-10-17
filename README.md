@@ -30,7 +30,7 @@ tt 是著名的 MUD 客户端，可以用来登录北侠。本程序基于 tt �
     * 新手任务
         - [X] 炼丹
         - [X] 阵法
-        - [ ] 采气
+        - [X] 采气
         - [ ] 诵经
 
 ## 如何使用本程序
@@ -101,27 +101,26 @@ docker run --name pkuxkx --env PKUXKX_ID=foo --env PKUXKX_PASSWD=password --rm -
 
 ## 命令列表
 
-| 门派 | 分类     | 模块          | 适用位置  | 简称 / 全称           | 参数            | 功能               |
-|------|----------|---------------|-----------|-----------------------|-----------------|--------------------|
-| 通用 | 系统     | 框架          | 任意      | LDS / reload-scripts  | 无              | 重新加载主程序     |
-| 通用 | 系统     | 框架          | 任意      | cls / clear           | 无              | 卸载模块           |
-| 通用 | 系统     | 框架          | 任意      | exit / quit*          | 无              | 临时退出游戏       |
-| 通用 | 系统     | 框架          | 任意      | LM / load-module      | `<module-name>` | 加载模块           |
-| 通用 | 系统     | 框架          | 任意      | KM / kill-module      | `<module-name>` | 卸载模块           |
-| 通用 | 系统     | 框架          | 任意      | cls / clear           | 无              | 卸载模块           |
-| 通用 | 练功     | liangong      | 任意      | KSLG / liangong.start | 无              | 开始练功           |
-| 通用 | 练功     | liangong      | 任意      | TZLG / liangong.stop  | 无              | 停止练功           |
-| 武当 | 新手任务 | quest         | 武当广场  | AQ / ask-quest        | 无              | 获取新手任务       |
-| 武当 | 新手任务 | quest         | 武当广场  | CQ / cancel-quest     | 无              | 取消新手任务       |
-| 武当 | 新手任务 | quest         | 武当广场  | SQ / success-quest    | 无              | 报告新手任务       |
-| 武当 | 新手任务 | quest-liandan | 武当广场  | liandan-start         | 无              | 去炼丹             |
-| 武当 | 新手任务 | quest-zhenfa  | 武当广场  | zhenfa-start          | 无              | 去练习阵法         |
-| 武当 | 新手任务 | quest-caiqi   | 武当广场  | caiqi.start           | 无              | 去采气             |
-| 武当 | 新手任务 | quest-caiqi   | 过密林后* | caiqi.cont1           | 无              | 继续去采气         |
-| 武当 | 新手任务 | quest-caiqi   | 过密林后* | caiqi.cont2           | 无              | 继续去报告采气结果 |
+| 门派 | 分类     | 模块          | 适用位置  | 简称 / 全称           | 参数            | 功能           |
+|------|----------|---------------|-----------|-----------------------|-----------------|----------------|
+| 通用 | 系统     | 框架          | 任意      | LDS / reload-scripts  | 无              | 重新加载主程序 |
+| 通用 | 系统     | 框架          | 任意      | cls / clear           | 无              | 卸载模块       |
+| 通用 | 系统     | 框架          | 任意      | exit / quit*          | 无              | 临时退出游戏   |
+| 通用 | 系统     | 框架          | 任意      | LM / load-module      | `<module-name>` | 加载模块       |
+| 通用 | 系统     | 框架          | 任意      | KM / kill-module      | `<module-name>` | 卸载模块       |
+| 通用 | 系统     | 框架          | 任意      | cls / clear           | 无              | 卸载模块       |
+| 通用 | 练功     | liangong      | 任意      | KSLG / liangong.start | 无              | 开始练功       |
+| 通用 | 练功     | liangong      | 任意      | TZLG / liangong.stop  | 无              | 停止练功       |
+| 武当 | 新手任务 | quest         | 武当广场  | AQ / ask-quest        | 无              | 获取新手任务   |
+| 武当 | 新手任务 | quest         | 武当广场  | CQ / cancel-quest     | 无              | 取消新手任务   |
+| 武当 | 新手任务 | quest         | 武当广场  | SQ / success-quest    | 无              | 报告新手任务   |
+| 武当 | 新手任务 | quest-liandan | 武当广场  | liandan-start         | 无              | 去炼丹         |
+| 武当 | 新手任务 | quest-zhenfa  | 武当广场  | zhenfa-start          | 无              | 去练习阵法     |
+| 武当 | 新手任务 | quest-caiqi   | 武当广场  | caiqi.start           | 无              | 去采气         |
+| 武当 | 新手任务 | quest-caiqi   | 天柱峰下* | caiqi.back            | 无              | 采气归来       |
 
 * 注 1: `exit`/`quit` 会直接断开北侠并关闭 tt，对北侠来说算断线。北侠系统是有这两个命令的，但会遗失身上所有物品，所以这里故意覆盖了原有命令。
-* 注 2: 这里过密林后需要停留在最后一个密林房间就可以了，记住一定不要上下台阶。
+* 注 2: 正常情况下会自动回来，但如果出问题的话可以用这个命令手动回来，但注意起点一定要在天柱峰下。
 
 ## 如何贡献
 
